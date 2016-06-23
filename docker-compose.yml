@@ -1,0 +1,16 @@
+prom:
+  image: prom/prometheus
+  ports:
+    - 9090:9090
+  volumes:
+    - ./prometheus/config/prometheus.yml:/etc/prometheus/prometheus.yml
+    - ./prometheus/data:/prometheus
+
+grafana:
+  image: grafana/grafana
+  ports:
+    - 3000:3000
+  links:
+    - prom:prometheus
+  volumes:
+    - ./grafana/data:/var/lib/grafana
